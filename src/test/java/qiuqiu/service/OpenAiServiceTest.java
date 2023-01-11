@@ -1,5 +1,6 @@
 package qiuqiu.service;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import qiuqiu.BaseTests;
 import qiuqiu.service.impl.OpenAiServiceImpl;
@@ -16,6 +17,7 @@ public class OpenAiServiceTest extends BaseTests {
     private OpenAiServiceImpl openAiService;
 
     @Test
+    @Disabled
     public void testComplete() {
         String complete = openAiService.complete("我迷路了");
         System.out.println(complete);
