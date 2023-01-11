@@ -1,41 +1,39 @@
-package com.tencent.wxcloudrun.controller.vo;
+package com.tencent.wxcloudrun.dto;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 /**
- * BaseResponseMessage class
- * 响应基础类
+ * BaseRequestMessage class
+ * 消息基类用于存放公共属性
  *
  * @author BowenWang
  * @date 2019/08/04
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-public class BaseResponseMessage implements Serializable {
-    /**
-     * 接收方帐号（收到的OpenID）
-     */
-    @XmlElement(name = "ToUserName")
-    private String toUserName;
-
+public class BaseRequestMessage implements Serializable {
     /**
      * 开发者微信号
      */
-    @XmlElement(name = "FromUserName")
+    private String toUserName;
+
+    /**
+     * 发送方帐号（一个OpenID）
+     */
     private String fromUserName;
 
     /**
      * 消息创建时间 （整型）
      */
-    @XmlElement(name = "CreateTime")
     private String createTime;
 
     /**
      * 消息类型，文本为text
      */
-    @XmlElement(name = "MsgType")
     private String msgType;
 
+    /**
+     * 	消息id，64位整型
+     */
+    private String msgId;
 
     public String getToUserName() {
         return toUserName;
@@ -69,13 +67,12 @@ public class BaseResponseMessage implements Serializable {
         this.msgType = msgType;
     }
 
-    @Override
-    public String toString() {
-        return "BaseResponseMessage{" +
-                "toUserName='" + toUserName + '\'' +
-                ", fromUserName='" + fromUserName + '\'' +
-                ", createTime='" + createTime + '\'' +
-                ", msgType='" + msgType + '\'' +
-                '}';
+    public String getMsgId() {
+        return msgId;
     }
+
+    public void setMsgId(String msgId) {
+        this.msgId = msgId;
+    }
+
 }
