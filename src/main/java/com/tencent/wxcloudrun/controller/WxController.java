@@ -34,8 +34,7 @@ public class WxController {
     public void receiveMessage(@RequestBody String xml, HttpServletRequest request,
                                HttpServletResponse response) throws Exception {
         Map<String, Object> params = XmlUtil.xmlStrToMap(xml);
-        log.info("params:{}", new Gson().toJson(params));
-        System.out.println("params=" + new Gson().toJson(params));
+        log.info("xml:{}", xml);
         // 获取发送者ID
         String fromUserName = (String) params.get("FromUserName");
         // 获取消息类型
