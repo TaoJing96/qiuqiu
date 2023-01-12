@@ -30,7 +30,7 @@ public class OpenAiServiceImpl implements OpenAiService {
     private Map<String, String> buildOpenAiHeader() {
         Map<String, String> map = new HashMap<>();
         map.put("Content-Type", "application/json");
-        map.put("Authorization", "Bearer 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");
+        map.put("Authorization", "Bearer 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");
         return map;
     }
 
