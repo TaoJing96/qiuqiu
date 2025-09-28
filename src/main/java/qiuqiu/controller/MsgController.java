@@ -54,7 +54,8 @@ public class MsgController {
     private BaseResponseMessage replayMessage(MaterialEnum type, Object obj, String toUserName) {
         BaseResponseMessage responseMessage = null;
         if (MaterialEnum.TEXT.equals(type)) {
-            responseMessage = textService.returnText((String) obj);
+//            responseMessage = textService.returnText((String) obj);
+            responseMessage = textService.returnText("succ");
         }
 //        else if (MaterialEnum.IMAGE.equals(type)) {
 //            responseMessage = imageService.returnImage((String) obj);
