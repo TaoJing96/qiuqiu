@@ -29,11 +29,6 @@ public class MsgController {
     @Resource
     private CacheService cacheService;
 
-    //用户第一次进入 填写qiuqiu信息
-    //功能 智能对话  记录醒的时间 记录吃饭开始结束时间
-
-    //1. 看是否开启智能对话
-
     @PostMapping(produces = {"application/xml;charset=UTF-8"})
     public Object processMessage(HttpServletRequest request,
                                  HttpServletResponse response) throws Exception {
