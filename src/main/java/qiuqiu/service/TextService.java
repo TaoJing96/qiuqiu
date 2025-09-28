@@ -23,7 +23,8 @@ public interface TextService {
      * 返回文本消息
      *
      * @param content
+     * @param toUserName
      * @return
      */
-    TextResponse returnText(String content);
+    TextResponse returnText(String content, String toUserName);
 }
