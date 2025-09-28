@@ -29,8 +29,8 @@ public class TextServiceImpl implements TextService {
     @Override
     public TextResponse returnText(String content) {
         TextResponse responseText = new TextResponse();
-        String complete = openAiService.complete(content);
-        responseText.setContent(complete);
+//        String complete = openAiService.complete(content);
+        responseText.setContent("mock");
         return responseText;
     }
 }
