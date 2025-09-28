@@ -45,7 +45,7 @@ public class MsgController {
         if (msgResp != null) {
             return msgResp;
         }
-
+        log.info("sender:{}, message:{}, msgId:{}", fromUserName, message, msgId);
         BaseResponseMessage responseMessage = replayMessage(MaterialEnum.TEXT, message, fromUserName);
         cacheService.putMsgResp(msgId, responseMessage);
         return responseMessage;
