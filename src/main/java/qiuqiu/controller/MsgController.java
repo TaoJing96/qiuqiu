@@ -48,7 +48,7 @@ public class MsgController {
 
         BaseResponseMessage responseMessage = replayMessage(MaterialEnum.TEXT, message, fromUserName);
         cacheService.putMsgResp(msgId, responseMessage);
-        return responseMessage;
+        return "responseMessage";
     }
 
     private BaseResponseMessage replayMessage(MaterialEnum type, Object obj, String toUserName) {
