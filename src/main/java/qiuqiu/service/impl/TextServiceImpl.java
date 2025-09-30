@@ -1,5 +1,6 @@
 package qiuqiu.service.impl;
 
+import com.google.common.collect.ImmutableMap;
 import org.springframework.stereotype.Service;
 import qiuqiu.dto.TextRequest;
 import qiuqiu.dto.TextResponse;
@@ -22,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class TextServiceImpl implements TextService {
 
-    private static final Map<String, ActionEnum> USER_TO_ACTIONS = Map.of("oiOx76PwDdjbOR1Ai2MQ0sm3pFCs", ActionEnum.ADD_COMMEMORATION_DAY);
+    private static final Map<String, ActionEnum> USER_TO_ACTIONS = ImmutableMap.of("oiOx76PwDdjbOR1Ai2MQ0sm3pFCs", ActionEnum.ADD_COMMEMORATION_DAY);
 
     private static final Map<String, ActionEnum> USER_TO_LATEST_ACTION = new ConcurrentHashMap<>();
 
