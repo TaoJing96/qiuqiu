@@ -36,11 +36,11 @@ public class MsgController {
         String message = (String) request.getAttribute("message");
         String fromUserName = (String) request.getAttribute("sender");
         String msgId = (String) request.getAttribute("msgId");
+        log.info("sender:{}, message:{}, msgId:{}", fromUserName, message, msgId);
         BaseResponseMessage msgResp = cacheService.getMsgResp(msgId);
         if (msgResp != null) {
             return msgResp;
         }
-        log.info("sender:{}, message:{}, msgId:{}", fromUserName, message, msgId);
         BaseResponseMessage responseMessage = replayMessage(MaterialEnum.TEXT, message, fromUserName);
         cacheService.putMsgResp(msgId, responseMessage);
         return responseMessage;
