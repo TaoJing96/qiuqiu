@@ -4,4 +4,28 @@ CREATE TABLE `Counters` (
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Action` (
+                          `id` int(11) NOT NULL AUTO_INCREMENT,
+                          `type` varchar(11) NOT NULL,
+                          `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                          `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                          PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ActionRecord` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `actionId` int(11) NOT NULL,
+    `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ActionRecordDesc` (
+                                `id` int(11) NOT NULL AUTO_INCREMENT,
+                                `type` varchar(11) NOT NULL,
+                                `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8
