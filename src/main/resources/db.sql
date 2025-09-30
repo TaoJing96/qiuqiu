@@ -12,20 +12,20 @@ CREATE TABLE `Action` (
                           `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                           `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                           PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `ActionRecord` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `actionId` int(11) NOT NULL,
     `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `ActionRecordDesc` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT,
-                                `type` varchar(11) NOT NULL,
+                                `actionRecordId` int(11) NOT NULL,
+                                `detail` varchar(512) NOT NULL,
                                 `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                 `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                 PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8

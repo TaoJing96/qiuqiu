@@ -1,14 +1,15 @@
 package qiuqiu.controller;
 
 import com.google.gson.Gson;
-import qiuqiu.dto.TextRequest;
-import qiuqiu.enums.MaterialEnum;
-import qiuqiu.util.XmlUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import qiuqiu.dto.ImageRequest;
+import qiuqiu.dto.TextRequest;
+import qiuqiu.enums.MaterialEnum;
+import qiuqiu.util.XmlUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +35,6 @@ public class WxController {
         // 获取消息类型
         String msgType = (String) params.get("MsgType");
         if (MaterialEnum.TEXT.getType().equals(msgType)) {
-            // 用于储存文本或语音转换文本结果
             String content;
             TextRequest message = (TextRequest) XmlUtil.mapToBean(params, TextRequest.class);
             content = message.getContent();
@@ -43,6 +43,19 @@ public class WxController {
             request.setAttribute("sender", fromUserName);
             request.setAttribute("msgId", message.getMsgId());
             request.getRequestDispatcher("/message").forward(request, response);
+        } else if (MaterialEnum.IMAGE.getType().equals(msgType)) {
+            ImageRequest imageMsg = (ImageRequest) XmlUtil.mapToBean(params, ImageRequest.class);
+
+            String mediaId = imageMsg.getMediaId();
+            String picUrl = imageMsg.getPicUrl();
+            String msgId = imageMsg.getMsgId();
+            log.info("mediaId:{}, picUrl:{}, msgId:{}", mediaId, picUrl, msgId);
+
+            request.setAttribute("sender", fromUserName);
+            request.setAttribute("mediaId", mediaId);
+            request.setAttribute("picUrl", picUrl);
+            request.setAttribute("msgId", msgId);
+            request.getRequestDispatcher("/image").forward(request, response);
         }
     }
 }
