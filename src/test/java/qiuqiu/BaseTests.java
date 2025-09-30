@@ -12,7 +12,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ComponentScan("qiuqiu")
 @ActiveProfiles(profiles = {"test"})
 public class BaseTests {
-
     @Test
     public void baseTest() {
 
