@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import qiuqiu.dto.BaseResponseMessage;
 import qiuqiu.enums.MaterialEnum;
 import qiuqiu.service.CacheService;
+import qiuqiu.service.ImageService;
 import qiuqiu.service.TextService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,9 @@ public class MsgController {
     private TextService textService;
 
     @Resource
+    private ImageService imageService;
+
+    @Resource
     private CacheService cacheService;
 
     @PostMapping(produces = {"application/xml;charset=UTF-8"})
@@ -41,19 +45,20 @@ public class MsgController {
         if (msgResp != null) {
             return msgResp;
         }
-        BaseResponseMessage responseMessage = replayMessage(MaterialEnum.TEXT, message, fromUserName);
+        BaseResponseMessage responseMessage = replayMessage(MaterialEnum.TEXT, message, fromUserName, request);
         cacheService.putMsgResp(msgId, responseMessage);
         return responseMessage;
     }
 
-    private BaseResponseMessage replayMessage(MaterialEnum type, Object obj, String toUserName) {
+    private BaseResponseMessage replayMessage(MaterialEnum type, Object obj, String toUserName, HttpServletRequest request) {
         BaseResponseMessage responseMessage = null;
         if (MaterialEnum.TEXT.equals(type)) {
             responseMessage = textService.returnText((String) obj, toUserName);
+        } else if (MaterialEnum.IMAGE.equals(type)) {
+            String picUrl = (String) request.getAttribute("picUrl");
+            responseMessage = imageService.replyImage(picUrl, toUserName);
         }
-//        else if (MaterialEnum.IMAGE.equals(type)) {
-//            responseMessage = imageService.returnImage((String) obj);
-//        } else if (MaterialEnum.VIDEO.equals(type)) {
+//        else if (MaterialEnum.VIDEO.equals(type)) {
 //            responseMessage = videoService.returnVideo((Video) obj);
 //        } else if (MaterialEnum.VOICE.equals(type)) {
 //            responseMessage = voiceService.returnVoice((String) obj);

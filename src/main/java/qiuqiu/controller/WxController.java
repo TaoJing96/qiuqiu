@@ -55,7 +55,7 @@ public class WxController {
             request.setAttribute("mediaId", mediaId);
             request.setAttribute("picUrl", picUrl);
             request.setAttribute("msgId", msgId);
-            request.getRequestDispatcher("/image").forward(request, response);
+            request.getRequestDispatcher("/message").forward(request, response);
         }
     }
 }
