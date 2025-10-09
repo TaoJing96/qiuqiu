@@ -35,26 +35,27 @@ public class MsgController {
 
     @PostMapping(produces = {"application/xml;charset=UTF-8"})
     public Object processMessage(HttpServletRequest request,
-                                 HttpServletResponse response) throws Exception {
+                                 HttpServletResponse response) {
         // 获取消息类型
         String message = (String) request.getAttribute("message");
         String fromUserName = (String) request.getAttribute("sender");
         String msgId = (String) request.getAttribute("msgId");
+        String type = (String) request.getAttribute("type");
         log.info("sender:{}, message:{}, msgId:{}", fromUserName, message, msgId);
         BaseResponseMessage msgResp = cacheService.getMsgResp(msgId);
         if (msgResp != null) {
             return msgResp;
         }
-        BaseResponseMessage responseMessage = replayMessage(MaterialEnum.TEXT, message, fromUserName, request);
+        BaseResponseMessage responseMessage = replayMessage(type, message, fromUserName, request);
         cacheService.putMsgResp(msgId, responseMessage);
         return responseMessage;
     }
 
-    private BaseResponseMessage replayMessage(MaterialEnum type, Object obj, String toUserName, HttpServletRequest request) {
+    private BaseResponseMessage replayMessage(String type, Object obj, String toUserName, HttpServletRequest request) {
         BaseResponseMessage responseMessage = null;
-        if (MaterialEnum.TEXT.equals(type)) {
+        if (MaterialEnum.TEXT.getType().equals(type)) {
             responseMessage = textService.returnText((String) obj, toUserName);
-        } else if (MaterialEnum.IMAGE.equals(type)) {
+        } else if (MaterialEnum.IMAGE.getType().equals(type)) {
             String picUrl = (String) request.getAttribute("picUrl");
             responseMessage = imageService.replyImage(picUrl, toUserName);
         }

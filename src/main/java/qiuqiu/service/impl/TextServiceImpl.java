@@ -37,7 +37,7 @@ public class TextServiceImpl implements TextService {
 
     @Override
     public TextResponse returnText(String content, String toUserName) {
-        String resp = "无法理解，请先输入要执行的命令";
+        String resp = buildActionList();
         ActionEnum currentAction = getCurrentAction(toUserName);
         if (currentAction == null) {
             currentAction = getAction(content, toUserName);
@@ -49,6 +49,14 @@ public class TextServiceImpl implements TextService {
         TextResponse responseText = new TextResponse();
         responseText.setContent(resp);
         return responseText;
+    }
+
+    private String buildActionList() {
+        StringBuilder sb = new StringBuilder();
+        for (ActionEnum actionEnum : ActionEnum.values()) {
+            sb.append(actionEnum.getCnCode()).append(": ").append(actionEnum.getCnCode()).append("\n");
+        }
+        return sb.toString();
     }
 
     private ActionEnum getCurrentAction(String user) {

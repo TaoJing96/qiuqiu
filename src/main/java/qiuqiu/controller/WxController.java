@@ -34,6 +34,7 @@ public class WxController {
         String fromUserName = (String) params.get("FromUserName");
         // 获取消息类型
         String msgType = (String) params.get("MsgType");
+        request.setAttribute("type", msgType);
         if (MaterialEnum.TEXT.getType().equals(msgType)) {
             String content;
             TextRequest message = (TextRequest) XmlUtil.mapToBean(params, TextRequest.class);
