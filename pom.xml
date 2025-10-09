@@ -11,7 +11,7 @@
     <groupId>com.tencent</groupId>
     <artifactId>qiuqiu</artifactId>
     <version>1.0</version>
-    <name>springboot-wxcloudrun</name>
+    <name>qiuqiu</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
