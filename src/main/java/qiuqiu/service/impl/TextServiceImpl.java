@@ -1,6 +1,7 @@
 package qiuqiu.service.impl;
 
 import com.google.common.collect.ImmutableMap;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import qiuqiu.dto.TextRequest;
 import qiuqiu.dto.TextResponse;
@@ -23,6 +24,7 @@ import java.util.Map;
  * @date 2019/08/03
  */
 @Service
+@Slf4j
 public class TextServiceImpl implements TextService {
 
     private static final Map<String, ActionEnum> USER_TO_ACTIONS = ImmutableMap.of("oiOx76PwDdjbOR1Ai2MQ0sm3pFCs", ActionEnum.ADD_COMMEMORATION_DAY);
@@ -43,6 +45,7 @@ public class TextServiceImpl implements TextService {
         if (dialogAction == null) {
             currentAction = ActionEnum.findByNum(content);
             if (currentAction == null) {
+                log.info("没有找到对应的操作, content:{}", content);
                 responseText.setContent(buildActionList());
                 return responseText;
             } else {

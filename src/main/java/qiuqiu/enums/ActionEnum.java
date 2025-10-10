@@ -25,7 +25,7 @@ public enum ActionEnum {
 
     public static ActionEnum findByNum(String num) {
         for (ActionEnum actionEnum : ActionEnum.values()) {
-            if (actionEnum.num == num) {
+            if (actionEnum.num.equals(num)) {
                 return actionEnum;
             }
         }
