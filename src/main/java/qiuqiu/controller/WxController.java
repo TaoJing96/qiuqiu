@@ -28,6 +28,7 @@ public class WxController {
     public void receiveMessage(@RequestBody String xml, HttpServletRequest request,
                                HttpServletResponse response) throws Exception {
         Map<String, Object> params = XmlUtil.xmlStrToMap(xml);
+        log.info("xml:{}", xml);
         log.info("params:{}", JsonUtil.toJson( params));
         // 获取发送者ID
         String fromUserName = (String) params.get("FromUserName");
@@ -57,9 +58,5 @@ public class WxController {
             request.setAttribute("msgId", msgId);
             request.getRequestDispatcher("/message").forward(request, response);
         }
-    }
-
-    public static void main(String[] args) {
-        String s= "";
     }
 }
