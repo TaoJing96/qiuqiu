@@ -36,7 +36,7 @@ public class AddDailyImgActor implements Actor {
             String cosKey = DateUtil.getToday() + "/" + System.currentTimeMillis() + ".jpg";
             WxUtil.uploadInputStream(new ByteArrayInputStream(bytes), cosKey, "image/jpeg");
             DialogUtil.incrementDialogStep(context.getToUserName());
-            context.setResp("图片上传成功");
+            context.setResp("请添加备注");
         } else if (step == 3) {
             context.setResp("添加成功");
             DialogUtil.terminateDialog(context.getToUserName());
