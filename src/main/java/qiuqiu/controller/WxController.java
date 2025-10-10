@@ -1,6 +1,5 @@
 package qiuqiu.controller;
 
-import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import qiuqiu.dto.ImageRequest;
 import qiuqiu.dto.TextRequest;
 import qiuqiu.enums.MaterialEnum;
+import qiuqiu.util.JsonUtil;
 import qiuqiu.util.XmlUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +28,7 @@ public class WxController {
     public void receiveMessage(@RequestBody String xml, HttpServletRequest request,
                                HttpServletResponse response) throws Exception {
         Map<String, Object> params = XmlUtil.xmlStrToMap(xml);
-        log.info("xml:{}end", xml);
-        log.info("params:{}", new Gson().toJson(params));
+        log.info("params:{}", JsonUtil.toJson( params));
         // 获取发送者ID
         String fromUserName = (String) params.get("FromUserName");
         // 获取消息类型
@@ -45,7 +44,7 @@ public class WxController {
             request.setAttribute("msgId", message.getMsgId());
             request.getRequestDispatcher("/message").forward(request, response);
         } else if (MaterialEnum.IMAGE.getType().equals(msgType)) {
-            ImageRequest imageMsg = (ImageRequest) XmlUtil.mapToBean(params, ImageRequest.class);
+            ImageRequest imageMsg = JsonUtil.fromJson(JsonUtil.toJson(params), ImageRequest.class);
 
             String mediaId = imageMsg.getMediaId();
             String picUrl = imageMsg.getPicUrl();
@@ -58,5 +57,9 @@ public class WxController {
             request.setAttribute("msgId", msgId);
             request.getRequestDispatcher("/message").forward(request, response);
         }
+    }
+
+    public static void main(String[] args) {
+        String s= "";
     }
 }
