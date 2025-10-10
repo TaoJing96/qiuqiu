@@ -5,13 +5,15 @@ import org.springframework.stereotype.Service;
 import qiuqiu.dto.TextRequest;
 import qiuqiu.dto.TextResponse;
 import qiuqiu.enums.ActionEnum;
+import qiuqiu.model.ActionContext;
+import qiuqiu.model.DialogAction;
 import qiuqiu.service.TextService;
 import qiuqiu.service.impl.actors.Actor;
 import qiuqiu.service.impl.actors.ActorRegistry;
+import qiuqiu.util.DialogUtil;
 
 import javax.annotation.Resource;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -25,8 +27,6 @@ public class TextServiceImpl implements TextService {
 
     private static final Map<String, ActionEnum> USER_TO_ACTIONS = ImmutableMap.of("oiOx76PwDdjbOR1Ai2MQ0sm3pFCs", ActionEnum.ADD_COMMEMORATION_DAY);
 
-    private static final Map<String, ActionEnum> USER_TO_LATEST_ACTION = new ConcurrentHashMap<>();
-
     @Resource
     private ActorRegistry actorRegistry;
 
@@ -37,17 +37,29 @@ public class TextServiceImpl implements TextService {
 
     @Override
     public TextResponse returnText(String content, String toUserName) {
-        String resp = buildActionList();
-        ActionEnum currentAction = getCurrentAction(toUserName);
-        if (currentAction == null) {
-            currentAction = getAction(content, toUserName);
-        }
-        if (currentAction != null) {
-            Actor actor = actorRegistry.getActor(currentAction);
-            actor.act(content, toUserName);
-        }
         TextResponse responseText = new TextResponse();
-        responseText.setContent(resp);
+        DialogAction dialogAction = DialogUtil.getCurDialogStep(toUserName);
+        ActionEnum currentAction;
+        if (dialogAction == null) {
+            currentAction = ActionEnum.findByNum(content);
+            if (currentAction == null) {
+                responseText.setContent(buildActionList());
+                return responseText;
+            } else {
+                validateActionAndReturnErrorMsg(currentAction, toUserName);
+                DialogUtil.initDialog(toUserName, currentAction);
+            }
+        } else {
+            currentAction = dialogAction.getCurAction();
+        }
+        Actor actor = actorRegistry.getActor(currentAction);
+
+        ActionContext actionContext = new ActionContext();
+        actionContext.setContent(content);
+        actionContext.setToUserName(toUserName);
+        actor.act(actionContext);
+
+        responseText.setContent(actionContext.getResp());
         return responseText;
     }
 
@@ -57,20 +69,6 @@ public class TextServiceImpl implements TextService {
             sb.append(actionEnum.getCnCode()).append(": ").append(actionEnum.getCnCode()).append("\n");
         }
         return sb.toString();
-    }
-
-    private ActionEnum getCurrentAction(String user) {
-        return USER_TO_LATEST_ACTION.get(user);
-    }
-
-    private ActionEnum getAction(String content, String user) {
-        for (ActionEnum actionEnum : ActionEnum.values()) {
-            if (actionEnum.getCnCode().equals(content)) {
-                validateActionAndReturnErrorMsg(actionEnum, user);
-                return actionEnum;
-            }
-        }
-        return null;
     }
 
     private String validateActionAndReturnErrorMsg(ActionEnum actionEnum, String toUserName) {

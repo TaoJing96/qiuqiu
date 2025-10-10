@@ -1,6 +1,7 @@
 package qiuqiu.service.impl.actors;
 
 import qiuqiu.enums.ActionEnum;
+import qiuqiu.model.ActionContext;
 
 /**
  * @author Jing Tao
@@ -8,7 +9,7 @@ import qiuqiu.enums.ActionEnum;
  */
 public interface Actor {
 
-    String act(String content, String user);
+    void act(ActionContext context);
 
     ActionEnum getActionType();
 }

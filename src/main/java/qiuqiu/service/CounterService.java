@@ -1,6 +1,6 @@
 package qiuqiu.service;
 
-import qiuqiu.model.Counter;
+import qiuqiu.dao.po.Counter;
 
 import java.util.Optional;
 

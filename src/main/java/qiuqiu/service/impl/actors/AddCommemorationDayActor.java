@@ -2,6 +2,7 @@ package qiuqiu.service.impl.actors;
 
 import org.springframework.stereotype.Component;
 import qiuqiu.enums.ActionEnum;
+import qiuqiu.model.ActionContext;
 
 /**
  * @author Jing Tao
@@ -11,8 +12,7 @@ import qiuqiu.enums.ActionEnum;
 public class AddCommemorationDayActor implements Actor {
 
     @Override
-    public String act(String content, String user) {
-        return content + "添加成功";
+    public void act(ActionContext context) {
     }
 
     @Override

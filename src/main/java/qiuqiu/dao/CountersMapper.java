@@ -1,6 +1,6 @@
 package qiuqiu.dao;
 
-import qiuqiu.model.Counter;
+import qiuqiu.dao.po.Counter;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

@@ -1,4 +1,4 @@
-package qiuqiu.model;
+package qiuqiu.dao.po;
 
 import lombok.Data;
 

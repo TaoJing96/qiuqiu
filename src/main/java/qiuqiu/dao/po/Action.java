@@ -1,4 +1,4 @@
-package qiuqiu.model;
+package qiuqiu.dao.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package qiuqiu.model;
+package qiuqiu.dao.po;
 
 /**
  * @author Jing Tao

@@ -1,7 +1,7 @@
 package qiuqiu.service.impl;
 
 import qiuqiu.dao.CountersMapper;
-import qiuqiu.model.Counter;
+import qiuqiu.dao.po.Counter;
 import qiuqiu.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
