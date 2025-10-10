@@ -1,6 +1,5 @@
 package qiuqiu.service.impl;
 
-import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import qiuqiu.dto.TextRequest;
@@ -10,11 +9,7 @@ import qiuqiu.model.ActionContext;
 import qiuqiu.model.DialogAction;
 import qiuqiu.service.TextService;
 import qiuqiu.service.impl.actors.Actor;
-import qiuqiu.service.impl.actors.ActorRegistry;
 import qiuqiu.util.DialogUtil;
-
-import javax.annotation.Resource;
-import java.util.Map;
 
 
 /**
@@ -25,12 +20,7 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-public class TextServiceImpl implements TextService {
-
-    private static final Map<String, ActionEnum> USER_TO_ACTIONS = ImmutableMap.of("oiOx76PwDdjbOR1Ai2MQ0sm3pFCs", ActionEnum.ADD_COMMEMORATION_DAY);
-
-    @Resource
-    private ActorRegistry actorRegistry;
+public class TextServiceImpl extends CommonService implements TextService {
 
     @Override
     public void saveText(TextRequest requestTextMessage) {
@@ -64,23 +54,5 @@ public class TextServiceImpl implements TextService {
 
         responseText.setContent(actionContext.getResp());
         return responseText;
-    }
-
-    private String buildActionList() {
-        StringBuilder sb = new StringBuilder();
-        for (ActionEnum actionEnum : ActionEnum.values()) {
-            sb.append(actionEnum.getNum()).append(": ").append(actionEnum.getCnCode()).append("\n");
-        }
-        return sb.toString();
-    }
-
-    private String validateActionAndReturnErrorMsg(ActionEnum actionEnum, String toUserName) {
-        if (!USER_TO_ACTIONS.containsKey(toUserName)) {
-            return "游客";
-        }
-        if (!USER_TO_ACTIONS.get(toUserName).equals(actionEnum)) {
-            return "没有权限";
-        }
-        return null;
     }
 }

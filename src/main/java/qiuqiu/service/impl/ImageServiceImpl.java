@@ -3,11 +3,12 @@ package qiuqiu.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import qiuqiu.dto.TextResponse;
+import qiuqiu.enums.ActionEnum;
+import qiuqiu.model.ActionContext;
+import qiuqiu.model.DialogAction;
 import qiuqiu.service.ImageService;
-import qiuqiu.util.HttpUtil;
-import qiuqiu.util.WxUtil;
-
-import java.io.ByteArrayInputStream;
+import qiuqiu.service.impl.actors.Actor;
+import qiuqiu.util.DialogUtil;
 
 /**
  * @author Jing Tao
@@ -15,14 +16,27 @@ import java.io.ByteArrayInputStream;
  */
 @Slf4j
 @Service
-public class ImageServiceImpl implements ImageService {
+public class ImageServiceImpl extends CommonService implements ImageService {
 
     @Override
     public TextResponse replyImage(String mediaUrl, String toUserName) {
-        byte[] bytes = HttpUtil.downloadFile(mediaUrl);
-        WxUtil.uploadInputStream(new ByteArrayInputStream(bytes), "replyImage", "image/jpeg");
-        TextResponse textResponse = new TextResponse();
-        textResponse.setContent("保存成功");
-        return textResponse;
+        TextResponse responseText = new TextResponse();
+        DialogAction dialogAction = DialogUtil.getCurDialogStep(toUserName);
+        ActionEnum currentAction;
+        if (dialogAction == null) {
+            responseText.setContent(buildActionList());
+            return responseText;
+        } else {
+            currentAction = dialogAction.getCurAction();
+        }
+        Actor actor = actorRegistry.getActor(currentAction);
+
+        ActionContext actionContext = new ActionContext();
+        actionContext.setPicUrl(mediaUrl);
+        actionContext.setToUserName(toUserName);
+        actor.act(actionContext);
+
+        responseText.setContent(actionContext.getResp());
+        return responseText;
     }
 }
