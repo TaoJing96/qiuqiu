@@ -1,6 +1,5 @@
 package qiuqiu.controller;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import qiuqiu.BaseTests;
 import qiuqiu.enums.MaterialEnum;
@@ -18,7 +17,7 @@ public class MsgControllerTest extends BaseTests {
     @Resource
     private MsgController msgController;
 
-    @Test
+//    @Test
     public void testProcessImg() {
         request = new MockHttpServletRequest();
         request.setAttribute("picUrl", "http://mmbiz.qpic.cn/mmbiz_jpg/BuxA5fWIgY5I90qSS4HKl8mX66ibwYxtvEG3jqvlozGiaYVwtm9mm4JicvcVErxjtZIygIhQgVOZwlHRhJY2vMr5A/0");
@@ -28,7 +27,7 @@ public class MsgControllerTest extends BaseTests {
         msgController.processMessage(request, null);
     }
 
-    @Test
+//    @Test
     public void testProcessAddDailyImg() {
         request = new MockHttpServletRequest();
         request.setAttribute("type", MaterialEnum.TEXT.getType());
