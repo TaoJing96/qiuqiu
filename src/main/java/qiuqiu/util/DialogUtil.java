@@ -1,5 +1,6 @@
 package qiuqiu.util;
 
+import lombok.extern.slf4j.Slf4j;
 import qiuqiu.enums.ActionEnum;
 import qiuqiu.model.DialogAction;
 
@@ -10,12 +11,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Jing Tao
  * @date 2025/10/9 18:45
  */
+@Slf4j
 public class DialogUtil {
 
     private static final Map<String, DialogAction> USER_ID_TO_ACTION_AND_STEP = new ConcurrentHashMap<>();
 
     public static DialogAction getCurDialogStep(String userId) {
-        return USER_ID_TO_ACTION_AND_STEP.get(userId);
+        DialogAction dialogAction = USER_ID_TO_ACTION_AND_STEP.get(userId);
+        log.info("userId:{}, dialogAction:{}", userId, dialogAction);
+        return dialogAction;
     }
 
     public static void incrementDialogStep(String userId) {

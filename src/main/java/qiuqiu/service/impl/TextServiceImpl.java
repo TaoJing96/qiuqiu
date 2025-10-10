@@ -66,7 +66,7 @@ public class TextServiceImpl implements TextService {
     private String buildActionList() {
         StringBuilder sb = new StringBuilder();
         for (ActionEnum actionEnum : ActionEnum.values()) {
-            sb.append(actionEnum.getCnCode()).append(": ").append(actionEnum.getCnCode()).append("\n");
+            sb.append(actionEnum.getNum()).append(": ").append(actionEnum.getCnCode()).append("\n");
         }
         return sb.toString();
     }
