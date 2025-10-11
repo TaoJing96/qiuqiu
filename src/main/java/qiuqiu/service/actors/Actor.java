@@ -1,4 +1,4 @@
-package qiuqiu.service.impl.actors;
+package qiuqiu.service.actors;
 
 import qiuqiu.enums.ActionEnum;
 import qiuqiu.model.ActionContext;

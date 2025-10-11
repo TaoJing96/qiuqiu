@@ -1,4 +1,4 @@
-package qiuqiu.service.impl.actors;
+package qiuqiu.service.actors;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package qiuqiu.service.impl;
 
-import qiuqiu.dao.CountersMapper;
+import qiuqiu.dao.mapper.CountersMapper;
 import qiuqiu.dao.po.Counter;
 import qiuqiu.service.CounterService;
 import org.springframework.beans.factory.annotation.Autowired;

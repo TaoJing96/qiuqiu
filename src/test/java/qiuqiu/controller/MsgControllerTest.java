@@ -26,6 +26,7 @@ public class MsgControllerTest extends BaseTests {
         request.setAttribute("msgId", "12423423423423");
         request.setAttribute("sender", "jj");
         msgController.processMessage(request, null);
+        testProcessAddDailyImg();
     }
 
 //    @Test

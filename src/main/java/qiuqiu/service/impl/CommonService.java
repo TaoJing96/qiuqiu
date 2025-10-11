@@ -2,7 +2,7 @@ package qiuqiu.service.impl;
 
 import com.google.common.collect.ImmutableMap;
 import qiuqiu.enums.ActionEnum;
-import qiuqiu.service.impl.actors.ActorRegistry;
+import qiuqiu.service.actors.ActorRegistry;
 
 import javax.annotation.Resource;
 import java.util.Map;

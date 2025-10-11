@@ -1,4 +1,4 @@
-package qiuqiu.dao;
+package qiuqiu.dao.mapper;
 
 import qiuqiu.dao.po.Counter;
 import org.apache.ibatis.annotations.Mapper;

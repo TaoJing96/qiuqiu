@@ -17,7 +17,10 @@ CREATE TABLE `Action` (
 CREATE TABLE `ActionRecord` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `actionId` int(11) NOT NULL,
+    `operator` varchar(512) NOT NULL,
+    `detail` text NOT NULL,
     `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

@@ -7,7 +7,7 @@ import qiuqiu.enums.ActionEnum;
 import qiuqiu.model.ActionContext;
 import qiuqiu.model.DialogAction;
 import qiuqiu.service.ImageService;
-import qiuqiu.service.impl.actors.Actor;
+import qiuqiu.service.actors.Actor;
 import qiuqiu.util.DialogUtil;
 
 /**

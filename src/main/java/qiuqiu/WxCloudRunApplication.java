@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"qiuqiu.dao"})
+@MapperScan(basePackages = {"qiuqiu.dao.mapper"})
 @Slf4j
 public class WxCloudRunApplication {
 

@@ -1,4 +1,4 @@
-package qiuqiu.service.impl.actors;
+package qiuqiu.service.actors;
 
 import org.springframework.stereotype.Component;
 import qiuqiu.enums.ActionEnum;
