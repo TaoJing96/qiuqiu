@@ -1,30 +1,29 @@
 package qiuqiu.dao.po;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 /**
  * @author Jing Tao
- * @date 2025/9/30 15:30
+ * @date 2025/10/11 22:16
  */
-@TableName("ActionRecordDesc")
+@TableName("Recipe")
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class ActionRecordDescPO {
+public class RecipePO {
 
     @TableId(type = IdType.AUTO)
     private Integer id;
-    private Integer actionRecordId;
+    @TableField("actionId")
+    private Integer actionId;
+    private String operator;
     private String detail;
+    @TableField("createdAt")
     private LocalDateTime createdAt;
+    @TableField("updatedAt")
     private LocalDateTime updatedAt;
 }
